@@ -252,20 +252,26 @@ class TaskManager {
         document.querySelectorAll('[data-action="status"]').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                this.cycleTaskStatus(btn.dataset.taskId);
+                const taskId = btn.dataset.taskId;
+                this.cycleTaskStatus(taskId);
             });
         });
 
         document.querySelectorAll('[data-action="edit"]').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                this.openEditModal(btn.dataset.taskId);
+                const taskId = btn.dataset.taskId;
+                this.openEditModal(taskId);
             });
         });
 
-        // タスクアイテム全体のクリックでも編集モーダルを開く
+        // タスクアイテム全体のクリックでも編集モーダルを開く（ボタンクリック以外）
         document.querySelectorAll('.task-item').forEach(item => {
-            item.addEventListener('click', () => {
+            item.addEventListener('click', (e) => {
+                // ボタンクリックの場合は何もしない
+                if (e.target.closest('.task-status-btn') || e.target.closest('.task-edit-btn')) {
+                    return;
+                }
                 this.openEditModal(item.dataset.taskId);
             });
         });
