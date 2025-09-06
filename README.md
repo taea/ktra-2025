@@ -1,7 +1,7 @@
 # Ktra! The Lightweight Task Tracker - 2025 Edition
 
 - https://taea.github.io/ktra-2025/
-- ![ktra-imageonline co-5328077](https://github.com/user-attachments/assets/d24b745a-88ac-4030-bac5-f4ee76c30812)
+- ![ktra-imageonline co-4858461](https://github.com/user-attachments/assets/47eca0db-aae1-48bb-bb70-fd967492175f)
 - タスク管理ツールです。各タスクには、Not Started, Doing, Done の状態があり、それぞれアジャイル風なストーリーポイント 0, 1, 2, 3, 5, 8 Point が振れます
 - タスク一覧の左側の丸ボタンで、タスク開始や終了ができるようになっています
 - 今週の達成状況が可視化できるようになっています
