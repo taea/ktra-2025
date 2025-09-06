@@ -135,6 +135,25 @@
                     </label>
                 </div>
 
+                <!-- ステータス変更ボタン -->
+                <div class="status-actions">
+                    <label class="status-label">Status:</label>
+                    <div class="status-buttons">
+                        <button type="button" id="status-unstarted" class="btn-status" onclick="setTaskStatus('unstarted')">
+                            <i class="fas fa-circle-notch"></i>
+                            Not Started
+                        </button>
+                        <button type="button" id="status-doing" class="btn-status" onclick="setTaskStatus('doing')">
+                            <i class="fas fa-play"></i>
+                            Doing
+                        </button>
+                        <button type="button" id="status-done" class="btn-status" onclick="setTaskStatus('done')">
+                            <i class="fas fa-check"></i>
+                            Done
+                        </button>
+                    </div>
+                </div>
+
                 <div class="modal-actions">
                     <button type="submit" class="btn btn-primary">
                         <i class="fas fa-save"></i>

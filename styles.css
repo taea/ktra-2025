@@ -261,10 +261,39 @@ header h1 {
 .task-item.doing .task-status-btn {
     background: var(--color-base);
     border-color: var(--color-base);
+    position: relative;
 }
 
 .task-item.doing .task-status-btn i {
     color: var(--color-white);
+}
+
+/* Doingボタンホバー時にチェックアイコンを表示（デスクトップのみ） */
+@media (hover: hover) {
+    .task-item.doing .task-status-btn .fa-play {
+        transition: opacity 0.2s ease;
+    }
+    
+    .task-item.doing .task-status-btn::after {
+        content: "\f00c"; /* Font Awesome check icon */
+        font-family: "Font Awesome 6 Free";
+        font-weight: 900;
+        color: var(--color-white);
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+    
+    .task-item.doing .task-status-btn:hover .fa-play {
+        opacity: 0;
+    }
+    
+    .task-item.doing .task-status-btn:hover::after {
+        opacity: 1;
+    }
 }
 
 .task-item.done .task-status-btn {
@@ -374,6 +403,62 @@ header h1 {
 
 .modal-close:hover {
     color: var(--color-text);
+}
+
+/* ステータス変更ボタン */
+.status-actions {
+    margin: 20px 0;
+    padding: 15px;
+    background: var(--color-background);
+    border-radius: var(--border-radius);
+}
+
+.status-label {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--color-text-light);
+    margin-bottom: 10px;
+    font-weight: 500;
+}
+
+.status-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-status {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid var(--color-border);
+    background: var(--color-white);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 0.9rem;
+    color: var(--color-text);
+    min-width: 100px;
+}
+
+.btn-status:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.btn-status.active {
+    background: var(--color-base);
+    color: var(--color-white);
+    border-color: var(--color-base);
+}
+
+.btn-status.active-done {
+    background: var(--color-pt2);
+    color: var(--color-white);
+    border-color: var(--color-pt2);
 }
 
 .modal-actions {

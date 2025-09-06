@@ -91,6 +91,9 @@ class TaskManager {
         document.getElementById('edit-task-title').value = task.title;
         document.querySelector(`input[name="edit-points"][value="${task.points}"]`).checked = true;
         
+        // ステータスボタンの状態を更新
+        this.updateStatusButtons(task.status);
+        
         document.getElementById('edit-modal').classList.remove('hidden');
     }
 
@@ -123,6 +126,42 @@ class TaskManager {
     closeEditModal() {
         document.getElementById('edit-modal').classList.add('hidden');
         this.currentEditingTaskId = null;
+    }
+
+    // モーダルからステータスを変更
+    setTaskStatusFromModal(status) {
+        const task = this.tasks.find(t => t.id === this.currentEditingTaskId);
+        if (!task) return;
+        
+        task.status = status;
+        
+        // 完了時刻の記録
+        if (task.status === 'done') {
+            task.completedAt = new Date().toISOString();
+        } else {
+            task.completedAt = null;
+        }
+        
+        this.updateStatusButtons(status);
+        this.saveTasks();
+        this.render();
+    }
+
+    // ステータスボタンの表示を更新
+    updateStatusButtons(status) {
+        // すべてのボタンからアクティブクラスを削除
+        document.querySelectorAll('.btn-status').forEach(btn => {
+            btn.classList.remove('active', 'active-done');
+        });
+        
+        // 現在のステータスに応じてアクティブクラスを追加
+        if (status === 'unstarted') {
+            document.getElementById('status-unstarted').classList.add('active');
+        } else if (status === 'doing') {
+            document.getElementById('status-doing').classList.add('active');
+        } else if (status === 'done') {
+            document.getElementById('status-done').classList.add('active-done');
+        }
     }
 
     // 週間サマリーの表示切り替え
@@ -375,6 +414,7 @@ document.head.appendChild(style);
 // グローバル関数として公開（モーダル操作用）
 window.closeEditModal = () => taskManager.closeEditModal();
 window.deleteTask = () => taskManager.deleteTask();
+window.setTaskStatus = (status) => taskManager.setTaskStatusFromModal(status);
 
 // アプリケーションの初期化
 const taskManager = new TaskManager();
