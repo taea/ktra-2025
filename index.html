@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-tra - The Lightweight Task Tracker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>K-tra</h1>
+            <p class="tagline">The Lightweight Task Tracker</p>
+        </header>
+
+        <main>
+            <!-- 新規タスク追加フォーム -->
+            <section class="new-task-section">
+                <form id="new-task-form" class="task-form">
+                    <div class="form-group">
+                        <input type="text" 
+                               id="task-title" 
+                               class="task-input" 
+                               placeholder="What are you going to do?" 
+                               required>
+                    </div>
+                    
+                    <div class="point-selector">
+                        <label class="point-label">
+                            <input type="radio" name="points" value="0" checked>
+                            <span class="point-badge pt-0">0pt</span>
+                        </label>
+                        <label class="point-label">
+                            <input type="radio" name="points" value="1">
+                            <span class="point-badge pt-1">1pt</span>
+                        </label>
+                        <label class="point-label">
+                            <input type="radio" name="points" value="2">
+                            <span class="point-badge pt-2">2pt</span>
+                        </label>
+                        <label class="point-label">
+                            <input type="radio" name="points" value="3">
+                            <span class="point-badge pt-3">3pt</span>
+                        </label>
+                        <label class="point-label">
+                            <input type="radio" name="points" value="5">
+                            <span class="point-badge pt-5">5pt</span>
+                        </label>
+                        <label class="point-label">
+                            <input type="radio" name="points" value="8">
+                            <span class="point-badge pt-8">8pt</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Add Task
+                    </button>
+                </form>
+            </section>
+
+            <!-- 週間サマリー -->
+            <section class="week-summary">
+                <button id="week-summary-btn" class="btn-link">
+                    <i class="fas fa-chart-bar"></i>
+                    This Week's Summary
+                </button>
+                <div id="week-summary-content" class="summary-content hidden">
+                    <!-- サマリーコンテンツはJSで動的に生成 -->
+                </div>
+            </section>
+
+            <!-- タスクリスト -->
+            <section class="tasks-section">
+                <div id="tasks-list" class="tasks-list">
+                    <!-- タスクはJSで動的に生成 -->
+                </div>
+                
+                <div id="empty-state" class="empty-state hidden">
+                    <i class="fas fa-tasks"></i>
+                    <p>There's no tasks yet</p>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>K-tra 2025 - Local Storage Edition</p>
+        </footer>
+    </div>
+
+    <!-- タスク編集モーダル -->
+    <div id="edit-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Edit Task</h2>
+                <button class="modal-close" onclick="closeEditModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="edit-task-form" class="task-form">
+                <input type="hidden" id="edit-task-id">
+                
+                <div class="form-group">
+                    <input type="text" 
+                           id="edit-task-title" 
+                           class="task-input" 
+                           required>
+                </div>
+                
+                <div class="point-selector">
+                    <label class="point-label">
+                        <input type="radio" name="edit-points" value="0">
+                        <span class="point-badge pt-0">0pt</span>
+                    </label>
+                    <label class="point-label">
+                        <input type="radio" name="edit-points" value="1">
+                        <span class="point-badge pt-1">1pt</span>
+                    </label>
+                    <label class="point-label">
+                        <input type="radio" name="edit-points" value="2">
+                        <span class="point-badge pt-2">2pt</span>
+                    </label>
+                    <label class="point-label">
+                        <input type="radio" name="edit-points" value="3">
+                        <span class="point-badge pt-3">3pt</span>
+                    </label>
+                    <label class="point-label">
+                        <input type="radio" name="edit-points" value="5">
+                        <span class="point-badge pt-5">5pt</span>
+                    </label>
+                    <label class="point-label">
+                        <input type="radio" name="edit-points" value="8">
+                        <span class="point-badge pt-8">8pt</span>
+                    </label>
+                </div>
+
+                <div class="modal-actions">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-save"></i>
+                        Save
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="deleteTask()">
+                        <i class="fas fa-trash"></i>
+                        Delete
+                    </button>
+                    <button type="button" class="btn btn-secondary" onclick="closeEditModal()">
+                        Cancel
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
