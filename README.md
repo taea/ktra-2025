@@ -1,11 +1,11 @@
-# Ktra! The Lightweight Task Tracker - 2025 Edition
+# K-tra! The Lightweight Task Tracker - 2025 Edition
 
 - https://taea.github.io/ktra-2025/
 - ![ktra-imageonline co-4858461](https://github.com/user-attachments/assets/47eca0db-aae1-48bb-bb70-fd967492175f)
 - タスク管理ツールです。各タスクには、Not Started, Doing, Done の状態があり、それぞれアジャイル風なストーリーポイント 0, 1, 2, 3, 5, 8 Point が振れます
 - タスク一覧の左側の丸ボタンで、タスク開始や終了ができるようになっています
 - 今週の達成状況が可視化できるようになっています
-- 11年前に作った Rails + Heroku 製のタスク管理アプリ Ktra を、html + JS + Local Storage のみでバイブコーディングで蘇らせるプロジェクトです
+- 11年前に作った Rails + Heroku 製のタスク管理アプリ K-tra を、html + JS + Local Storage のみでバイブコーディングで蘇らせるプロジェクトです
   - https://github.com/taea/ktra
  
 # 初期プロンプト
