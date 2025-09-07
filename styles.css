@@ -209,6 +209,22 @@ header h1 {
     gap: 10px;
 }
 
+/* 完了タスクと未完了タスクの視覚的分離 */
+.task-item.done:first-of-type {
+    margin-top: 20px;
+    position: relative;
+}
+
+.task-item.done:first-of-type::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: var(--color-border);
+}
+
 .task-item {
     background: var(--color-white);
     border-radius: var(--border-radius);
