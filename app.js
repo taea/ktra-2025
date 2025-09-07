@@ -95,17 +95,22 @@ class TaskManager {
 
     // ステータス変更アニメーション表示（render前用）
     showStatusAnimationBeforeRender(taskId, message, points) {
-        const taskElement = document.querySelector(`[data-task-id="${taskId}"]`);
-        if (!taskElement) return;
-        
-        // オーバーレイ要素を作成
+        // フルスクリーンオーバーレイ要素を作成
         const overlay = document.createElement('div');
-        overlay.className = `status-overlay pt-${points}`;
-        overlay.innerHTML = `<span class="status-message">${message}</span>`;
+        overlay.className = `status-overlay-fullscreen pt-${points}`;
+        overlay.innerHTML = `
+            <div class="status-message-container">
+                <span class="status-message">${message}</span>
+            </div>
+        `;
         
-        // タスク要素に追加
-        taskElement.style.position = 'relative';
-        taskElement.appendChild(overlay);
+        // body直下に追加（画面全体を覆う）
+        document.body.appendChild(overlay);
+        
+        // アニメーション開始
+        requestAnimationFrame(() => {
+            overlay.classList.add('active');
+        });
         
         // アニメーション後に削除してからrender
         setTimeout(() => {
@@ -113,8 +118,8 @@ class TaskManager {
             setTimeout(() => {
                 overlay.remove();
                 this.render(); // アニメーション終了後にrender
-            }, 300);
-        }, 500);
+            }, 400);
+        }, 800);
     }
 
     // タスクの編集モーダルを開く

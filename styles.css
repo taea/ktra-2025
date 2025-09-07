@@ -582,9 +582,9 @@ footer {
     position: relative;
 }
 
-/* ステータス変更オーバーレイ */
-.status-overlay {
-    position: absolute;
+/* フルスクリーンステータス変更オーバーレイ */
+.status-overlay-fullscreen {
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -592,46 +592,67 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 100;
-    border-radius: var(--border-radius);
-    animation: overlayIn 0.3s ease;
+    z-index: 9999;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-.status-overlay.pt-0 {
+.status-overlay-fullscreen.active {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.status-overlay-fullscreen.pt-0 {
     background: var(--color-pt0);
 }
 
-.status-overlay.pt-1 {
+.status-overlay-fullscreen.pt-1 {
     background: var(--color-pt1);
 }
 
-.status-overlay.pt-2 {
+.status-overlay-fullscreen.pt-2 {
     background: var(--color-pt2);
 }
 
-.status-overlay.pt-3 {
+.status-overlay-fullscreen.pt-3 {
     background: var(--color-pt3);
 }
 
-.status-overlay.pt-5 {
+.status-overlay-fullscreen.pt-5 {
     background: var(--color-pt5);
 }
 
-.status-overlay.pt-8 {
+.status-overlay-fullscreen.pt-8 {
     background: var(--color-pt8);
+}
+
+.status-message-container {
+    text-align: center;
+    animation: messageSlideUp 0.6s ease-out;
 }
 
 .status-message {
     color: var(--color-white);
-    font-size: 1.5rem;
-    font-weight: bold;
-    letter-spacing: 2px;
-    text-shadow: 0 2px 4px rgba(0,0,0,0.2);
-    animation: messageZoom 0.5s ease;
+    font-size: 4rem;
+    font-weight: 900;
+    letter-spacing: 4px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    display: inline-block;
+    animation: messagePulse 0.8s ease;
 }
 
-.status-overlay.fade-out {
-    animation: overlayOut 0.3s ease forwards;
+.status-overlay-fullscreen.fade-out {
+    opacity: 0;
+    transform: scale(1.05);
+}
+
+/* スマホサイズでフォントサイズ調整 */
+@media (max-width: 480px) {
+    .status-message {
+        font-size: 3rem;
+        letter-spacing: 3px;
+    }
 }
 
 @keyframes overlayIn {
@@ -660,6 +681,29 @@ footer {
     }
     50% {
         transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes messageSlideUp {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes messagePulse {
+    0% {
+        transform: scale(0.8);
+    }
+    50% {
+        transform: scale(1.1);
     }
     100% {
         transform: scale(1);
