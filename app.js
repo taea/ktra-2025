@@ -307,21 +307,34 @@ class TaskManager {
 
     // タスクのソート
     sortTasksByOrder() {
-        return [...this.tasks].sort((a, b) => {
-            // orderプロパティがある場合は優先
+        // 未完了タスクと完了タスクを分離
+        const activeTasks = this.tasks.filter(t => t.status !== 'done');
+        const doneTasks = this.tasks.filter(t => t.status === 'done');
+        
+        // それぞれをソート
+        const sortedActive = activeTasks.sort((a, b) => {
+            // カスタムオーダーがある場合は優先
             if (a.order !== undefined && b.order !== undefined) {
                 return a.order - b.order;
             }
-            
-            // orderがない場合はステータス順
+            // なければステータス順（doing -> unstarted）
             const statusPriority = {
                 'doing': 0,
-                'unstarted': 1,
-                'done': 2
+                'unstarted': 1
             };
-            
             return statusPriority[a.status] - statusPriority[b.status];
         });
+        
+        const sortedDone = doneTasks.sort((a, b) => {
+            // 完了タスク内でもカスタムオーダーを維持
+            if (a.order !== undefined && b.order !== undefined) {
+                return a.order - b.order;
+            }
+            return 0;
+        });
+        
+        // 未完了を上に、完了を下に結合
+        return [...sortedActive, ...sortedDone];
     }
 
     // 個別タスクのレンダリング
@@ -524,18 +537,39 @@ class TaskManager {
 
     // タスクの順序を変更
     reorderTasks(draggedId, targetId) {
+        const draggedTask = this.tasks.find(t => t.id === draggedId);
+        const targetTask = this.tasks.find(t => t.id === targetId);
+        
+        if (!draggedTask || !targetTask) return;
+        
+        // 完了タスクと未完了タスク間のドラッグを制限
+        const draggedIsDone = draggedTask.status === 'done';
+        const targetIsDone = targetTask.status === 'done';
+        
+        // 異なるグループ間のドラッグは無効
+        if (draggedIsDone !== targetIsDone) {
+            return;
+        }
+        
         const draggedIndex = this.tasks.findIndex(t => t.id === draggedId);
         const targetIndex = this.tasks.findIndex(t => t.id === targetId);
         
-        if (draggedIndex === -1 || targetIndex === -1) return;
-        
         // タスクを移動
-        const [draggedTask] = this.tasks.splice(draggedIndex, 1);
-        this.tasks.splice(targetIndex, 0, draggedTask);
+        const [movedTask] = this.tasks.splice(draggedIndex, 1);
+        this.tasks.splice(targetIndex, 0, movedTask);
         
-        // 新しい順序を保存
-        this.tasks.forEach((task, index) => {
+        // グループごとに順序を再設定
+        const activeTasks = this.tasks.filter(t => t.status !== 'done');
+        const doneTasks = this.tasks.filter(t => t.status === 'done');
+        
+        // 未完了タスクの順序を更新
+        activeTasks.forEach((task, index) => {
             task.order = index;
+        });
+        
+        // 完了タスクの順序を更新（1000から開始して区別）
+        doneTasks.forEach((task, index) => {
+            task.order = 1000 + index;
         });
         
         this.saveTasks();
