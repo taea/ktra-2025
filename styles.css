@@ -335,15 +335,6 @@ header h1 {
     opacity: 0.9;
 }
 
-.task-edit-btn {
-    color: var(--color-text-light);
-    font-size: 1.2rem;
-    transition: var(--transition);
-}
-
-.task-item:hover .task-edit-btn {
-    color: var(--color-base);
-}
 
 /* 空の状態 */
 .empty-state {

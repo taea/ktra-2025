@@ -279,9 +279,6 @@ class TaskManager {
                     <span class="task-title">${this.escapeHtml(task.title)}</span>
                     <span class="task-point pt-${task.points}">${task.points}pt</span>
                 </div>
-                <button class="task-edit-btn" data-action="edit" data-task-id="${task.id}">
-                    <i class="fas fa-chevron-right"></i>
-                </button>
             </div>
         `;
     }
@@ -296,19 +293,11 @@ class TaskManager {
             });
         });
 
-        document.querySelectorAll('[data-action="edit"]').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                const taskId = btn.dataset.taskId;
-                this.openEditModal(taskId);
-            });
-        });
-
-        // タスクアイテム全体のクリックでも編集モーダルを開く（ボタンクリック以外）
+        // タスクアイテム全体のクリックで編集モーダルを開く（ステータスボタン以外）
         document.querySelectorAll('.task-item').forEach(item => {
             item.addEventListener('click', (e) => {
-                // ボタンクリックの場合は何もしない
-                if (e.target.closest('.task-status-btn') || e.target.closest('.task-edit-btn')) {
+                // ステータスボタンクリックの場合は何もしない
+                if (e.target.closest('.task-status-btn')) {
                     return;
                 }
                 this.openEditModal(item.dataset.taskId);
