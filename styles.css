@@ -578,24 +578,14 @@ footer {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 10px;
-}
-
-/* ドラッグハンドル */
-.drag-handle {
+    gap: 15px;
     cursor: grab;
-    color: var(--color-text-light);
-    padding: 5px;
-    opacity: 0.5;
-    transition: opacity 0.2s ease;
-    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
 }
 
-.drag-handle:hover {
-    opacity: 1;
-}
-
-.drag-handle:active {
+.task-item:active {
     cursor: grabbing;
 }
 

@@ -6,6 +6,7 @@ class TaskManager {
         this.draggedElement = null;
         this.draggedTaskId = null;
         this.touchStartY = null;
+        this.touchTimer = null;
         this.init();
     }
 
@@ -324,9 +325,6 @@ class TaskManager {
             <div class="task-item ${task.status} pt-${task.points}" 
                  data-task-id="${task.id}"
                  draggable="true">
-                <div class="drag-handle">
-                    <i class="fas fa-grip-vertical"></i>
-                </div>
                 <button class="task-status-btn" data-action="status" data-task-id="${task.id}">
                     ${statusIcon[task.status]}
                 </button>
@@ -348,11 +346,11 @@ class TaskManager {
             });
         });
 
-        // タスクアイテム全体のクリックで編集モーダルを開く（ステータスボタンとドラッグハンドル以外）
+        // タスクアイテム全体のクリックで編集モーダルを開く（ステータスボタン以外）
         document.querySelectorAll('.task-item').forEach(item => {
             item.addEventListener('click', (e) => {
-                // ステータスボタンまたはドラッグハンドルクリックの場合は何もしない
-                if (e.target.closest('.task-status-btn') || e.target.closest('.drag-handle')) {
+                // ステータスボタンクリックの場合は何もしない
+                if (e.target.closest('.task-status-btn')) {
                     return;
                 }
                 this.openEditModal(item.dataset.taskId);
@@ -434,18 +432,25 @@ class TaskManager {
     // タッチ開始（iPhone対応）
     handleTouchStart(e) {
         const touch = e.touches[0];
-        const dragHandle = e.target.closest('.drag-handle');
         
-        // ドラッグハンドルをタッチした場合のみドラッグ開始
-        if (!dragHandle) return;
+        // ステータスボタンをタッチした場合はドラッグしない
+        if (e.target.closest('.task-status-btn')) return;
         
-        this.draggedElement = e.currentTarget;
-        this.draggedTaskId = e.currentTarget.dataset.taskId;
-        this.touchStartY = touch.clientY;
-        
-        e.currentTarget.classList.add('dragging');
-        e.currentTarget.style.position = 'relative';
-        e.currentTarget.style.zIndex = '1000';
+        // 長押しタイマーを設定（300ms後にドラッグ開始）
+        this.touchTimer = setTimeout(() => {
+            this.draggedElement = e.currentTarget;
+            this.draggedTaskId = e.currentTarget.dataset.taskId;
+            this.touchStartY = touch.clientY;
+            
+            e.currentTarget.classList.add('dragging');
+            e.currentTarget.style.position = 'relative';
+            e.currentTarget.style.zIndex = '1000';
+            
+            // 触覚フィードバック（対応デバイスのみ）
+            if (window.navigator && window.navigator.vibrate) {
+                window.navigator.vibrate(10);
+            }
+        }, 300);
     }
 
     // タッチ移動
@@ -475,6 +480,12 @@ class TaskManager {
 
     // タッチ終了
     handleTouchEnd(e) {
+        // タイマーをクリア
+        if (this.touchTimer) {
+            clearTimeout(this.touchTimer);
+            this.touchTimer = null;
+        }
+        
         if (!this.draggedElement) return;
         
         const touch = e.changedTouches[0];
