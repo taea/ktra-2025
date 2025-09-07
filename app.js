@@ -70,13 +70,6 @@ class TaskManager {
         const previousStatus = task.status;
         task.status = statusCycle[task.status];
         
-        // アニメーション表示
-        if (previousStatus === 'unstarted' && task.status === 'doing') {
-            this.showStatusAnimation(taskId, 'START!', task.points);
-        } else if (previousStatus === 'doing' && task.status === 'done') {
-            this.showStatusAnimation(taskId, 'DONE!', task.points);
-        }
-        
         // 完了時刻の記録
         if (task.status === 'done') {
             task.completedAt = new Date().toISOString();
@@ -84,12 +77,24 @@ class TaskManager {
             task.completedAt = null;
         }
 
+        // データを保存
         this.saveTasks();
-        this.render();
+        
+        // アニメーション表示（render前に実行）
+        const shouldShowAnimation = 
+            (previousStatus === 'unstarted' && task.status === 'doing') ||
+            (previousStatus === 'doing' && task.status === 'done');
+            
+        if (shouldShowAnimation) {
+            const message = task.status === 'doing' ? 'START!' : 'DONE!';
+            this.showStatusAnimationBeforeRender(taskId, message, task.points);
+        } else {
+            this.render();
+        }
     }
 
-    // ステータス変更アニメーション表示
-    showStatusAnimation(taskId, message, points) {
+    // ステータス変更アニメーション表示（render前用）
+    showStatusAnimationBeforeRender(taskId, message, points) {
         const taskElement = document.querySelector(`[data-task-id="${taskId}"]`);
         if (!taskElement) return;
         
@@ -102,11 +107,12 @@ class TaskManager {
         taskElement.style.position = 'relative';
         taskElement.appendChild(overlay);
         
-        // アニメーション後に削除
+        // アニメーション後に削除してからrender
         setTimeout(() => {
             overlay.classList.add('fade-out');
             setTimeout(() => {
                 overlay.remove();
+                this.render(); // アニメーション終了後にrender
             }, 300);
         }, 500);
     }
