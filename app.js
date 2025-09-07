@@ -67,7 +67,15 @@ class TaskManager {
             'done': 'unstarted'
         };
 
+        const previousStatus = task.status;
         task.status = statusCycle[task.status];
+        
+        // アニメーション表示
+        if (previousStatus === 'unstarted' && task.status === 'doing') {
+            this.showStatusAnimation(taskId, 'START!', task.points);
+        } else if (previousStatus === 'doing' && task.status === 'done') {
+            this.showStatusAnimation(taskId, 'DONE!', task.points);
+        }
         
         // 完了時刻の記録
         if (task.status === 'done') {
@@ -78,6 +86,29 @@ class TaskManager {
 
         this.saveTasks();
         this.render();
+    }
+
+    // ステータス変更アニメーション表示
+    showStatusAnimation(taskId, message, points) {
+        const taskElement = document.querySelector(`[data-task-id="${taskId}"]`);
+        if (!taskElement) return;
+        
+        // オーバーレイ要素を作成
+        const overlay = document.createElement('div');
+        overlay.className = `status-overlay pt-${points}`;
+        overlay.innerHTML = `<span class="status-message">${message}</span>`;
+        
+        // タスク要素に追加
+        taskElement.style.position = 'relative';
+        taskElement.appendChild(overlay);
+        
+        // アニメーション後に削除
+        setTimeout(() => {
+            overlay.classList.add('fade-out');
+            setTimeout(() => {
+                overlay.remove();
+            }, 300);
+        }, 500);
     }
 
     // タスクの編集モーダルを開く
