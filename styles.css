@@ -262,9 +262,40 @@ header h1 {
     color: var(--color-text-light);
 }
 
-.task-item.doing .task-status-btn {
-    background: var(--color-base);
-    border-color: var(--color-base);
+/* Doingステータス - ポイント別背景色 */
+.task-item.doing.pt-0 .task-status-btn {
+    background: var(--color-pt0);
+    border-color: var(--color-pt0);
+    position: relative;
+}
+
+.task-item.doing.pt-1 .task-status-btn {
+    background: var(--color-pt1);
+    border-color: var(--color-pt1);
+    position: relative;
+}
+
+.task-item.doing.pt-2 .task-status-btn {
+    background: var(--color-pt2);
+    border-color: var(--color-pt2);
+    position: relative;
+}
+
+.task-item.doing.pt-3 .task-status-btn {
+    background: var(--color-pt3);
+    border-color: var(--color-pt3);
+    position: relative;
+}
+
+.task-item.doing.pt-5 .task-status-btn {
+    background: var(--color-pt5);
+    border-color: var(--color-pt5);
+    position: relative;
+}
+
+.task-item.doing.pt-8 .task-status-btn {
+    background: var(--color-pt8);
+    border-color: var(--color-pt8);
     position: relative;
 }
 
@@ -300,9 +331,35 @@ header h1 {
     }
 }
 
-.task-item.done .task-status-btn {
+/* Doneステータス - ポイント別背景色 */
+.task-item.done.pt-0 .task-status-btn {
+    background: var(--color-pt0);
+    border-color: var(--color-pt0);
+}
+
+.task-item.done.pt-1 .task-status-btn {
+    background: var(--color-pt1);
+    border-color: var(--color-pt1);
+}
+
+.task-item.done.pt-2 .task-status-btn {
     background: var(--color-pt2);
     border-color: var(--color-pt2);
+}
+
+.task-item.done.pt-3 .task-status-btn {
+    background: var(--color-pt3);
+    border-color: var(--color-pt3);
+}
+
+.task-item.done.pt-5 .task-status-btn {
+    background: var(--color-pt5);
+    border-color: var(--color-pt5);
+}
+
+.task-item.done.pt-8 .task-status-btn {
+    background: var(--color-pt8);
+    border-color: var(--color-pt8);
 }
 
 .task-item.done .task-status-btn i {

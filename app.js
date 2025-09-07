@@ -271,7 +271,7 @@ class TaskManager {
         };
 
         return `
-            <div class="task-item ${task.status}" data-task-id="${task.id}">
+            <div class="task-item ${task.status} pt-${task.points}" data-task-id="${task.id}">
                 <button class="task-status-btn" data-action="status" data-task-id="${task.id}">
                     ${statusIcon[task.status]}
                 </button>
