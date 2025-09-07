@@ -118,8 +118,8 @@ class TaskManager {
             setTimeout(() => {
                 overlay.remove();
                 this.render(); // アニメーション終了後にrender
-            }, 400);
-        }, 800);
+            }, 300);
+        }, 600);
     }
 
     // タスクの編集モーダルを開く
