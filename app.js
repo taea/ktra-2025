@@ -265,7 +265,7 @@ class TaskManager {
     // 個別タスクのレンダリング
     renderTask(task) {
         const statusIcon = {
-            'unstarted': '',
+            'unstarted': '<i class="fas fa-play"></i>',
             'doing': '<i class="fas fa-play"></i>',
             'done': '<i class="fas fa-check"></i>'
         };

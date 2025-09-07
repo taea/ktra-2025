@@ -258,6 +258,10 @@ header h1 {
     border-color: var(--color-text-light);
 }
 
+.task-item.unstarted .task-status-btn i {
+    color: var(--color-text-light);
+}
+
 .task-item.doing .task-status-btn {
     background: var(--color-base);
     border-color: var(--color-base);
