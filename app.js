@@ -280,11 +280,17 @@ class TaskManager {
         tasksList.classList.remove('hidden');
         emptyState.classList.add('hidden');
 
-        // アクティブなタスク（未完了）を上に、完了タスクを下に
+        // ソート順: Doing → Unstarted → Done
         const sortedTasks = [...this.tasks].sort((a, b) => {
-            if (a.status === 'done' && b.status !== 'done') return 1;
-            if (a.status !== 'done' && b.status === 'done') return -1;
-            return 0;
+            // ステータスの優先順位を定義
+            const statusPriority = {
+                'doing': 0,
+                'unstarted': 1,
+                'done': 2
+            };
+            
+            // 優先順位で比較
+            return statusPriority[a.status] - statusPriority[b.status];
         });
 
         tasksList.innerHTML = sortedTasks.map(task => this.renderTask(task)).join('');
