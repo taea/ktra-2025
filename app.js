@@ -3,6 +3,9 @@ class TaskManager {
     constructor() {
         this.tasks = [];
         this.currentEditingTaskId = null;
+        this.draggedElement = null;
+        this.draggedTaskId = null;
+        this.touchStartY = null;
         this.init();
     }
 
@@ -280,23 +283,33 @@ class TaskManager {
         tasksList.classList.remove('hidden');
         emptyState.classList.add('hidden');
 
-        // ソート順: Doing → Unstarted → Done
-        const sortedTasks = [...this.tasks].sort((a, b) => {
-            // ステータスの優先順位を定義
+        // カスタムオーダーがある場合はそれを使用、ない場合はステータス順
+        const sortedTasks = this.sortTasksByOrder();
+
+        tasksList.innerHTML = sortedTasks.map(task => this.renderTask(task)).join('');
+
+        // イベントリスナーを再設定
+        this.attachTaskEventListeners();
+        this.attachDragAndDropListeners();
+    }
+
+    // タスクのソート
+    sortTasksByOrder() {
+        return [...this.tasks].sort((a, b) => {
+            // orderプロパティがある場合は優先
+            if (a.order !== undefined && b.order !== undefined) {
+                return a.order - b.order;
+            }
+            
+            // orderがない場合はステータス順
             const statusPriority = {
                 'doing': 0,
                 'unstarted': 1,
                 'done': 2
             };
             
-            // 優先順位で比較
             return statusPriority[a.status] - statusPriority[b.status];
         });
-
-        tasksList.innerHTML = sortedTasks.map(task => this.renderTask(task)).join('');
-
-        // イベントリスナーを再設定
-        this.attachTaskEventListeners();
     }
 
     // 個別タスクのレンダリング
@@ -308,7 +321,12 @@ class TaskManager {
         };
 
         return `
-            <div class="task-item ${task.status} pt-${task.points}" data-task-id="${task.id}">
+            <div class="task-item ${task.status} pt-${task.points}" 
+                 data-task-id="${task.id}"
+                 draggable="true">
+                <div class="drag-handle">
+                    <i class="fas fa-grip-vertical"></i>
+                </div>
                 <button class="task-status-btn" data-action="status" data-task-id="${task.id}">
                     ${statusIcon[task.status]}
                 </button>
@@ -330,16 +348,176 @@ class TaskManager {
             });
         });
 
-        // タスクアイテム全体のクリックで編集モーダルを開く（ステータスボタン以外）
+        // タスクアイテム全体のクリックで編集モーダルを開く（ステータスボタンとドラッグハンドル以外）
         document.querySelectorAll('.task-item').forEach(item => {
             item.addEventListener('click', (e) => {
-                // ステータスボタンクリックの場合は何もしない
-                if (e.target.closest('.task-status-btn')) {
+                // ステータスボタンまたはドラッグハンドルクリックの場合は何もしない
+                if (e.target.closest('.task-status-btn') || e.target.closest('.drag-handle')) {
                     return;
                 }
                 this.openEditModal(item.dataset.taskId);
             });
         });
+    }
+
+    // ドラッグ&ドロップのイベントリスナーを設定
+    attachDragAndDropListeners() {
+        const taskItems = document.querySelectorAll('.task-item');
+        
+        taskItems.forEach(item => {
+            // デスクトップ用ドラッグイベント
+            item.addEventListener('dragstart', (e) => this.handleDragStart(e));
+            item.addEventListener('dragend', (e) => this.handleDragEnd(e));
+            item.addEventListener('dragover', (e) => this.handleDragOver(e));
+            item.addEventListener('drop', (e) => this.handleDrop(e));
+            item.addEventListener('dragenter', (e) => this.handleDragEnter(e));
+            item.addEventListener('dragleave', (e) => this.handleDragLeave(e));
+            
+            // モバイル用タッチイベント（iPhone Safari対応）
+            item.addEventListener('touchstart', (e) => this.handleTouchStart(e), {passive: false});
+            item.addEventListener('touchmove', (e) => this.handleTouchMove(e), {passive: false});
+            item.addEventListener('touchend', (e) => this.handleTouchEnd(e));
+        });
+    }
+
+    // ドラッグ開始
+    handleDragStart(e) {
+        this.draggedElement = e.currentTarget;
+        this.draggedTaskId = e.currentTarget.dataset.taskId;
+        e.currentTarget.classList.add('dragging');
+        e.dataTransfer.effectAllowed = 'move';
+    }
+
+    // ドラッグ終了
+    handleDragEnd(e) {
+        e.currentTarget.classList.remove('dragging');
+        document.querySelectorAll('.task-item').forEach(item => {
+            item.classList.remove('drag-over');
+        });
+    }
+
+    // ドラッグオーバー
+    handleDragOver(e) {
+        if (e.preventDefault) {
+            e.preventDefault();
+        }
+        e.dataTransfer.dropEffect = 'move';
+        return false;
+    }
+
+    // ドラッグエンター
+    handleDragEnter(e) {
+        if (e.currentTarget !== this.draggedElement) {
+            e.currentTarget.classList.add('drag-over');
+        }
+    }
+
+    // ドラッグリーブ
+    handleDragLeave(e) {
+        e.currentTarget.classList.remove('drag-over');
+    }
+
+    // ドロップ
+    handleDrop(e) {
+        if (e.stopPropagation) {
+            e.stopPropagation();
+        }
+        
+        const dropTarget = e.currentTarget;
+        if (this.draggedElement !== dropTarget) {
+            this.reorderTasks(this.draggedTaskId, dropTarget.dataset.taskId);
+        }
+        
+        return false;
+    }
+
+    // タッチ開始（iPhone対応）
+    handleTouchStart(e) {
+        const touch = e.touches[0];
+        const dragHandle = e.target.closest('.drag-handle');
+        
+        // ドラッグハンドルをタッチした場合のみドラッグ開始
+        if (!dragHandle) return;
+        
+        this.draggedElement = e.currentTarget;
+        this.draggedTaskId = e.currentTarget.dataset.taskId;
+        this.touchStartY = touch.clientY;
+        
+        e.currentTarget.classList.add('dragging');
+        e.currentTarget.style.position = 'relative';
+        e.currentTarget.style.zIndex = '1000';
+    }
+
+    // タッチ移動
+    handleTouchMove(e) {
+        if (!this.draggedElement) return;
+        
+        e.preventDefault();
+        const touch = e.touches[0];
+        const currentY = touch.clientY;
+        const deltaY = currentY - this.touchStartY;
+        
+        // ドラッグ中の要素を移動
+        this.draggedElement.style.transform = `translateY(${deltaY}px)`;
+        
+        // ドロップ対象を検出
+        const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+        const taskBelow = elementBelow?.closest('.task-item');
+        
+        document.querySelectorAll('.task-item').forEach(item => {
+            item.classList.remove('drag-over');
+        });
+        
+        if (taskBelow && taskBelow !== this.draggedElement) {
+            taskBelow.classList.add('drag-over');
+        }
+    }
+
+    // タッチ終了
+    handleTouchEnd(e) {
+        if (!this.draggedElement) return;
+        
+        const touch = e.changedTouches[0];
+        const elementBelow = document.elementFromPoint(touch.clientX, touch.clientY);
+        const taskBelow = elementBelow?.closest('.task-item');
+        
+        if (taskBelow && taskBelow !== this.draggedElement) {
+            this.reorderTasks(this.draggedTaskId, taskBelow.dataset.taskId);
+        }
+        
+        // スタイルをリセット
+        this.draggedElement.classList.remove('dragging');
+        this.draggedElement.style.position = '';
+        this.draggedElement.style.zIndex = '';
+        this.draggedElement.style.transform = '';
+        
+        document.querySelectorAll('.task-item').forEach(item => {
+            item.classList.remove('drag-over');
+        });
+        
+        this.draggedElement = null;
+        this.draggedTaskId = null;
+        this.touchStartY = null;
+    }
+
+    // タスクの順序を変更
+    reorderTasks(draggedId, targetId) {
+        const draggedIndex = this.tasks.findIndex(t => t.id === draggedId);
+        const targetIndex = this.tasks.findIndex(t => t.id === targetId);
+        
+        if (draggedIndex === -1 || targetIndex === -1) return;
+        
+        // タスクを移動
+        const [draggedTask] = this.tasks.splice(draggedIndex, 1);
+        this.tasks.splice(targetIndex, 0, draggedTask);
+        
+        // 新しい順序を保存
+        this.tasks.forEach((task, index) => {
+            task.order = index;
+        });
+        
+        this.saveTasks();
+        this.render();
     }
 
     // Local Storageへの保存
