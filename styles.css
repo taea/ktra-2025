@@ -656,7 +656,6 @@ footer {
     font-size: 4rem;
     font-weight: 900;
     letter-spacing: 4px;
-    text-shadow: 0 4px 20px rgba(0,0,0,0.3);
     display: inline-block;
     animation: messagePulse 0.4s ease;
 }
