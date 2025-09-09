@@ -1,9 +1,9 @@
 const CACHE_NAME = 'ktra-v1';
 const urlsToCache = [
-  '/',
-  '/index.html',
-  '/styles.css',
-  '/app.js',
+  '/ktra-2025/',
+  '/ktra-2025/index.html',
+  '/ktra-2025/styles.css',
+  '/ktra-2025/app.js',
   'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css'
 ];
 
