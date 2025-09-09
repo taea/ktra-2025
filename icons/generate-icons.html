@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>Ktra Icon Generator</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f5f7fa;
+            padding: 20px;
+        }
+        .icon-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            background: white;
+        }
+        .download-info {
+            margin: 20px 0;
+            padding: 15px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <h1>Ktra App Icons</h1>
+    <div class="download-info">
+        <p>右クリックして「画像を保存」でダウンロードしてください。</p>
+        <p>ファイル名はそれぞれ指定されているものを使用してください。</p>
+    </div>
+    <div class="icon-container" id="icons"></div>
+
+    <script>
+        const sizes = [72, 96, 128, 144, 152, 192, 384, 512];
+        const container = document.getElementById('icons');
+
+        sizes.forEach(size => {
+            const wrapper = document.createElement('div');
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = size;
+            canvas.height = size;
+            
+            // 背景
+            ctx.fillStyle = '#4a90e2';
+            ctx.fillRect(0, 0, size, size);
+            
+            // 中央に白い「K」を描画
+            ctx.fillStyle = '#ffffff';
+            ctx.font = `bold ${size * 0.5}px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif`;
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('K', size / 2, size / 2);
+            
+            // ラベル
+            const label = document.createElement('p');
+            label.textContent = `icon-${size}x${size}.png`;
+            
+            wrapper.appendChild(canvas);
+            wrapper.appendChild(label);
+            container.appendChild(wrapper);
+            
+            // 自動ダウンロード用のデータURL生成（デバッグ用）
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `icon-${size}x${size}.png`;
+                // 手動でダウンロードする場合はコメントを外す
+                // a.click();
+            });
+        });
+    </script>
+</body>
+</html>
