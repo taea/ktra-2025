@@ -679,7 +679,7 @@ window.setTaskStatus = (status) => taskManager.setTaskStatusFromModal(status);
 // Service Workerの登録（PWA対応）
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/service-worker.js')
+        navigator.serviceWorker.register('/ktra-2025/service-worker.js')
             .then(registration => {
                 console.log('ServiceWorker registration successful:', registration.scope);
             })
