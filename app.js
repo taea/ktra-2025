@@ -676,5 +676,18 @@ window.closeEditModal = () => taskManager.closeEditModal();
 window.deleteTask = () => taskManager.deleteTask();
 window.setTaskStatus = (status) => taskManager.setTaskStatusFromModal(status);
 
+// Service Workerの登録（PWA対応）
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('/service-worker.js')
+            .then(registration => {
+                console.log('ServiceWorker registration successful:', registration.scope);
+            })
+            .catch(err => {
+                console.log('ServiceWorker registration failed:', err);
+            });
+    });
+}
+
 // アプリケーションの初期化
 const taskManager = new TaskManager();
