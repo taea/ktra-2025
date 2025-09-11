@@ -275,71 +275,98 @@ header h1 {
 }
 
 /* Doingステータス - ポイント別背景色 */
-.task-item.doing.pt-0 .task-status-btn {
+.task-item.doing.pt-0 {
     background: var(--color-pt0);
-    border-color: var(--color-pt0);
-    position: relative;
 }
 
-.task-item.doing.pt-1 .task-status-btn {
+.task-item.doing.pt-1 {
     background: var(--color-pt1);
-    border-color: var(--color-pt1);
-    position: relative;
 }
 
-.task-item.doing.pt-2 .task-status-btn {
+.task-item.doing.pt-2 {
     background: var(--color-pt2);
-    border-color: var(--color-pt2);
-    position: relative;
 }
 
-.task-item.doing.pt-3 .task-status-btn {
+.task-item.doing.pt-3 {
     background: var(--color-pt3);
-    border-color: var(--color-pt3);
-    position: relative;
 }
 
-.task-item.doing.pt-5 .task-status-btn {
+.task-item.doing.pt-5 {
     background: var(--color-pt5);
-    border-color: var(--color-pt5);
-    position: relative;
 }
 
-.task-item.doing.pt-8 .task-status-btn {
+.task-item.doing.pt-8 {
     background: var(--color-pt8);
-    border-color: var(--color-pt8);
-    position: relative;
 }
 
-.task-item.doing .task-status-btn i {
+.task-item.doing .task-title {
     color: var(--color-white);
 }
 
-/* Doingボタンホバー時にチェックアイコンを表示（デスクトップのみ） */
+.task-item.doing .task-point {
+    background: var(--color-white);
+    color: inherit;
+}
+
+.task-item.doing.pt-0 .task-point {
+    color: var(--color-pt0);
+}
+
+.task-item.doing.pt-1 .task-point {
+    color: var(--color-pt1);
+}
+
+.task-item.doing.pt-2 .task-point {
+    color: var(--color-pt2);
+}
+
+.task-item.doing.pt-3 .task-point {
+    color: var(--color-pt3);
+}
+
+.task-item.doing.pt-5 .task-point {
+    color: var(--color-pt5);
+}
+
+.task-item.doing.pt-8 .task-point {
+    color: var(--color-pt8);
+}
+
+.task-item.doing .task-status-btn {
+    background: var(--color-white);
+    border-color: var(--color-white);
+    position: relative;
+}
+
+.task-item.doing.pt-0 .task-status-btn i {
+    color: var(--color-pt0);
+}
+
+.task-item.doing.pt-1 .task-status-btn i {
+    color: var(--color-pt1);
+}
+
+.task-item.doing.pt-2 .task-status-btn i {
+    color: var(--color-pt2);
+}
+
+.task-item.doing.pt-3 .task-status-btn i {
+    color: var(--color-pt3);
+}
+
+.task-item.doing.pt-5 .task-status-btn i {
+    color: var(--color-pt5);
+}
+
+.task-item.doing.pt-8 .task-status-btn i {
+    color: var(--color-pt8);
+}
+
+/* Doingボタンホバー時の効果（デスクトップのみ） */
 @media (hover: hover) {
-    .task-item.doing .task-status-btn .fa-play {
-        transition: opacity 0.2s ease;
-    }
-    
-    .task-item.doing .task-status-btn::after {
-        content: "\f00c"; /* Font Awesome check icon */
-        font-family: "Font Awesome 6 Free";
-        font-weight: 900;
-        color: var(--color-white);
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        opacity: 0;
-        transition: opacity 0.2s ease;
-    }
-    
-    .task-item.doing .task-status-btn:hover .fa-play {
-        opacity: 0;
-    }
-    
-    .task-item.doing .task-status-btn:hover::after {
-        opacity: 1;
+    .task-item.doing .task-status-btn:hover {
+        transform: scale(1.1);
+        opacity: 0.9;
     }
 }
 
