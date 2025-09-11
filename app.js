@@ -341,7 +341,7 @@ class TaskManager {
     renderTask(task) {
         const statusIcon = {
             'unstarted': '<i class="fas fa-play"></i>',
-            'doing': '<i class="fas fa-play"></i>',
+            'doing': '<i class="fas fa-check"></i>',
             'done': '<i class="fas fa-check"></i>'
         };
 
