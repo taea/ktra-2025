@@ -33,20 +33,31 @@
     // バージョン管理用のタイムスタンプをローカルストレージに保存
     // これにより、クライアント側で更新を検知できます
     const CACHE_VERSION_KEY = 'ktra_cache_version';
-    const currentVersion = Date.now().toString();
+    const FORCE_VERSION = '2025.1.14.1'; // 手動でバージョンを更新
     const storedVersion = localStorage.getItem(CACHE_VERSION_KEY);
 
-    if (storedVersion !== currentVersion) {
+    if (storedVersion !== FORCE_VERSION) {
         // バージョンが異なる場合、強制リロード
-        localStorage.setItem(CACHE_VERSION_KEY, currentVersion);
+        localStorage.setItem(CACHE_VERSION_KEY, FORCE_VERSION);
 
         // 初回訪問でない場合のみリロード
         if (storedVersion) {
-            console.log('Cache version updated, reloading page...');
+            console.log('Cache version updated from', storedVersion, 'to', FORCE_VERSION, ', reloading page...');
             // 少し遅延を入れてキャッシュクリアを確実に完了させる
             setTimeout(() => {
-                window.location.reload(true);
+                // より強力なリロード: URLにタイムスタンプを追加
+                const url = new URL(window.location.href);
+                url.searchParams.set('v', Date.now());
+                window.location.href = url.toString();
             }, 500);
         }
+    }
+
+    // Safari特有の追加対策: sessionStorageもクリア
+    try {
+        sessionStorage.clear();
+        console.log('SessionStorage cleared');
+    } catch(e) {
+        console.log('Could not clear sessionStorage:', e);
     }
 })();
