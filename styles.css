@@ -86,10 +86,10 @@ header h1 {
 
 .task-input {
     width: 100%;
-    padding: 12px 15px;
+    padding: 14px 18px;
     border: 2px solid var(--color-border);
     border-radius: var(--border-radius);
-    font-size: 1rem;
+    font-size: 1.1rem;
     transition: var(--transition);
     background: var(--color-white);
 }
@@ -126,7 +126,6 @@ header h1 {
     height: 56px;
     border-radius: 50%;
     background: var(--color-white);
-    border: 2px solid var(--color-border);
     cursor: pointer;
     transition: var(--transition);
     line-height: 1;
