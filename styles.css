@@ -70,6 +70,7 @@ header h1 {
     font-size: 1rem;
     margin: 0;
     opacity: 0.9;
+    letter-spacing: 1px;
 }
 
 /* フォーム */
