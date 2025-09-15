@@ -476,7 +476,7 @@ header h1 {
 
 .task-point .point-number {
     font-family: "Staatliches", sans-serif;
-    font-size: 1.6rem;
+    font-size: 2rem;
     font-weight: 400;
     letter-spacing: 0.05em;
     display: block;
@@ -709,7 +709,7 @@ footer {
     }
 
     .task-point .point-number {
-        font-size: 1.4rem;
+        font-size: 1.6rem;
     }
 
     .task-point .point-unit {
