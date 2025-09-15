@@ -352,28 +352,51 @@ header h1 {
 
 .task-item.doing .task-status-btn {
     background: var(--color-white);
-    border-color: var(--color-white);
     position: relative;
+}
+
+.task-item.doing.pt-0 .task-status-btn {
+    border-color: var(--color-pt0);
 }
 
 .task-item.doing.pt-0 .task-status-btn i {
     color: var(--color-pt0);
 }
 
+.task-item.doing.pt-1 .task-status-btn {
+    border-color: var(--color-pt1);
+}
+
 .task-item.doing.pt-1 .task-status-btn i {
     color: var(--color-pt1);
+}
+
+.task-item.doing.pt-2 .task-status-btn {
+    border-color: var(--color-pt2);
 }
 
 .task-item.doing.pt-2 .task-status-btn i {
     color: var(--color-pt2);
 }
 
+.task-item.doing.pt-3 .task-status-btn {
+    border-color: var(--color-pt3);
+}
+
 .task-item.doing.pt-3 .task-status-btn i {
     color: var(--color-pt3);
 }
 
+.task-item.doing.pt-5 .task-status-btn {
+    border-color: var(--color-pt5);
+}
+
 .task-item.doing.pt-5 .task-status-btn i {
     color: var(--color-pt5);
+}
+
+.task-item.doing.pt-8 .task-status-btn {
+    border-color: var(--color-pt8);
 }
 
 .task-item.doing.pt-8 .task-status-btn i {
