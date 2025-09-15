@@ -8,11 +8,11 @@
 
     /* ポイント別カラー */
     --color-pt0: #95a5a6;
-    --color-pt1: #578fcc;
-    --color-pt2: #30ad93;
-    --color-pt3: #ddb51c;
-    --color-pt5: #d97e30;
-    --color-pt8: #c8560b;
+    --color-pt1: #4785d4;
+    --color-pt2: #27b89d;
+    --color-pt3: #e5b818;
+    --color-pt5: #e17a25;
+    --color-pt8: #d24f08;
     
     --max-width: 480px;
     --border-radius: 8px;
