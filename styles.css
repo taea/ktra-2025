@@ -1,5 +1,6 @@
 :root {
     --color-base: #dbbea1;
+    --color-base-light: #e6d0ba; /* 少し明るくしたベースカラー */
     --color-background: #f5f7fa;
     --color-white: #ffffff;
     --color-text: #333333;
@@ -665,7 +666,7 @@ header h1 {
 }
 
 .modal-content {
-    background: var(--color-white);
+    background: var(--color-base-light);
     border-radius: var(--border-radius);
     max-width: var(--max-width);
     width: 100%;
