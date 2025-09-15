@@ -67,7 +67,7 @@ header h1 {
 
 .tagline {
     color: var(--color-white);
-    font-size: 0.9rem;
+    font-size: 1rem;
     margin: 0;
     opacity: 0.9;
 }
@@ -710,7 +710,7 @@ footer {
     }
 
     .tagline {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
     }
 
     .point-selector {
