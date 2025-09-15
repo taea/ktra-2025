@@ -132,9 +132,9 @@ header h1 {
 }
 
 .point-badge .point-number {
-    font-family: "Staatliches", sans-serif;
+    font-family: "Oswald", sans-serif;
     font-size: 1.6rem;
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: 0.05em;
     display: block;
 }
@@ -580,9 +580,9 @@ header h1 {
 }
 
 .task-point .point-number {
-    font-family: "Staatliches", sans-serif;
+    font-family: "Oswald", sans-serif;
     font-size: 2rem;
-    font-weight: 400;
+    font-weight: 700;
     letter-spacing: 0.05em;
     display: block;
 }
