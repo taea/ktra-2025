@@ -701,6 +701,11 @@ header h1 {
     color: var(--color-text);
 }
 
+/* モーダル内のフォーム */
+#edit-task-form {
+    padding: 20px;
+}
+
 /* ステータス変更ボタン */
 .status-actions {
     margin: 20px 0;
