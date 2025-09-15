@@ -208,7 +208,7 @@ header h1 {
 .btn-link {
     background: none;
     border: none;
-    color: var(--color-base);
+    color: #1f3466;
     cursor: pointer;
     padding: 10px;
     font-size: 0.95rem;
@@ -219,7 +219,8 @@ header h1 {
 }
 
 .btn-link:hover {
-    color: #3a7bc8;
+    color: #1f3466;
+    opacity: 0.8;
 }
 
 /* 週間サマリー */
