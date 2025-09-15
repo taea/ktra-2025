@@ -1,18 +1,18 @@
 :root {
-    --color-base: #4a90e2;
+    --color-base: #dbbea1;
     --color-background: #f5f7fa;
     --color-white: #ffffff;
     --color-text: #333333;
     --color-text-light: #666666;
     --color-border: #e1e8ed;
-    
+
     /* ポイント別カラー */
     --color-pt0: #95a5a6;
-    --color-pt1: #3498db;
-    --color-pt2: #2ecc71;
-    --color-pt3: #f39c12;
-    --color-pt5: #e74c3c;
-    --color-pt8: #9b59b6;
+    --color-pt1: #578fcc;
+    --color-pt2: #30ad93;
+    --color-pt3: #ddb51c;
+    --color-pt5: #d97e30;
+    --color-pt8: #c8560b;
     
     --max-width: 480px;
     --border-radius: 8px;
@@ -27,7 +27,7 @@
 
 body {
     font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    background-color: var(--color-background);
+    background-color: var(--color-base);
     color: var(--color-text);
     line-height: 1.6;
     min-height: 100vh;
@@ -41,22 +41,36 @@ body {
 
 /* ヘッダー */
 header {
-    text-align: center;
     margin-bottom: 30px;
     padding: 20px 0;
 }
 
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+}
+
+.logo {
+    width: 56px;
+    height: 56px;
+}
+
 header h1 {
-    color: var(--color-base);
-    font-size: 2.5rem;
-    font-weight: 400;
+    color: var(--color-white);
+    font-size: 2rem;
+    font-weight: 900;
     letter-spacing: -1px;
+    margin: 0;
 }
 
 .tagline {
-    color: var(--color-text-light);
-    font-size: 0.9rem;
-    margin-top: 5px;
+    color: var(--color-white);
+    font-size: 1rem;
+    margin: 0;
+    opacity: 0.9;
+    letter-spacing: 1px;
 }
 
 /* フォーム */
@@ -171,14 +185,15 @@ header h1 {
 }
 
 .btn-primary {
-    background-color: var(--color-base);
+    background-color: #3a4a5c;
     color: var(--color-white);
     width: 100%;
     justify-content: center;
 }
 
 .btn-primary:hover {
-    background-color: #3a7bc8;
+    background-color: #3a4a5c;
+    opacity: 0.9;
     transform: translateY(-2px);
 }
 
@@ -195,7 +210,7 @@ header h1 {
 .btn-link {
     background: none;
     border: none;
-    color: var(--color-base);
+    color: #3a4a5c;
     cursor: pointer;
     padding: 10px;
     font-size: 0.95rem;
@@ -206,7 +221,8 @@ header h1 {
 }
 
 .btn-link:hover {
-    color: #3a7bc8;
+    color: #3a4a5c;
+    opacity: 0.8;
 }
 
 /* 週間サマリー */
@@ -287,12 +303,52 @@ header h1 {
     transform: scale(1.1);
 }
 
-.task-item.unstarted .task-status-btn {
-    border-color: var(--color-base);
+.task-item.unstarted.pt-0 .task-status-btn {
+    border-color: var(--color-pt0);
 }
 
-.task-item.unstarted .task-status-btn i {
-    color: var(--color-base);
+.task-item.unstarted.pt-0 .task-status-btn i {
+    color: var(--color-pt0);
+}
+
+.task-item.unstarted.pt-1 .task-status-btn {
+    border-color: var(--color-pt1);
+}
+
+.task-item.unstarted.pt-1 .task-status-btn i {
+    color: var(--color-pt1);
+}
+
+.task-item.unstarted.pt-2 .task-status-btn {
+    border-color: var(--color-pt2);
+}
+
+.task-item.unstarted.pt-2 .task-status-btn i {
+    color: var(--color-pt2);
+}
+
+.task-item.unstarted.pt-3 .task-status-btn {
+    border-color: var(--color-pt3);
+}
+
+.task-item.unstarted.pt-3 .task-status-btn i {
+    color: var(--color-pt3);
+}
+
+.task-item.unstarted.pt-5 .task-status-btn {
+    border-color: var(--color-pt5);
+}
+
+.task-item.unstarted.pt-5 .task-status-btn i {
+    color: var(--color-pt5);
+}
+
+.task-item.unstarted.pt-8 .task-status-btn {
+    border-color: var(--color-pt8);
+}
+
+.task-item.unstarted.pt-8 .task-status-btn i {
+    color: var(--color-pt8);
 }
 
 /* Doingステータス - ポイント別背景色 */
@@ -337,28 +393,51 @@ header h1 {
 
 .task-item.doing .task-status-btn {
     background: var(--color-white);
-    border-color: var(--color-white);
     position: relative;
+}
+
+.task-item.doing.pt-0 .task-status-btn {
+    border-color: var(--color-pt0);
 }
 
 .task-item.doing.pt-0 .task-status-btn i {
     color: var(--color-pt0);
 }
 
+.task-item.doing.pt-1 .task-status-btn {
+    border-color: var(--color-pt1);
+}
+
 .task-item.doing.pt-1 .task-status-btn i {
     color: var(--color-pt1);
+}
+
+.task-item.doing.pt-2 .task-status-btn {
+    border-color: var(--color-pt2);
 }
 
 .task-item.doing.pt-2 .task-status-btn i {
     color: var(--color-pt2);
 }
 
+.task-item.doing.pt-3 .task-status-btn {
+    border-color: var(--color-pt3);
+}
+
 .task-item.doing.pt-3 .task-status-btn i {
     color: var(--color-pt3);
 }
 
+.task-item.doing.pt-5 .task-status-btn {
+    border-color: var(--color-pt5);
+}
+
 .task-item.doing.pt-5 .task-status-btn i {
     color: var(--color-pt5);
+}
+
+.task-item.doing.pt-8 .task-status-btn {
+    border-color: var(--color-pt8);
 }
 
 .task-item.doing.pt-8 .task-status-btn i {
@@ -477,7 +556,7 @@ header h1 {
 
 .task-point .point-number {
     font-family: "Staatliches", sans-serif;
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 400;
     letter-spacing: 0.05em;
     display: block;
@@ -683,8 +762,21 @@ footer {
         padding: 15px;
     }
 
+    .header-content {
+        flex-wrap: wrap;
+    }
+
+    .logo {
+        width: 48px;
+        height: 48px;
+    }
+
     header h1 {
-        font-size: 2rem;
+        font-size: 1.5rem;
+    }
+
+    .tagline {
+        font-size: 0.9rem;
     }
 
     .point-selector {
