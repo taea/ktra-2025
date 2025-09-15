@@ -288,11 +288,11 @@ header h1 {
 }
 
 .task-item.unstarted .task-status-btn {
-    border-color: var(--color-text-light);
+    border-color: var(--color-base);
 }
 
 .task-item.unstarted .task-status-btn i {
-    color: var(--color-text-light);
+    color: var(--color-base);
 }
 
 /* Doingステータス - ポイント別背景色 */
