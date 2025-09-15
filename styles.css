@@ -308,27 +308,44 @@ header h1 {
     color: inherit;
 }
 
-.task-item.doing.pt-0 .task-point {
+.task-item.doing .point-number,
+.task-item.doing .point-unit {
+    color: inherit;
+}
+
+.task-item.doing.pt-0 .task-point,
+.task-item.doing.pt-0 .point-number,
+.task-item.doing.pt-0 .point-unit {
     color: var(--color-pt0);
 }
 
-.task-item.doing.pt-1 .task-point {
+.task-item.doing.pt-1 .task-point,
+.task-item.doing.pt-1 .point-number,
+.task-item.doing.pt-1 .point-unit {
     color: var(--color-pt1);
 }
 
-.task-item.doing.pt-2 .task-point {
+.task-item.doing.pt-2 .task-point,
+.task-item.doing.pt-2 .point-number,
+.task-item.doing.pt-2 .point-unit {
     color: var(--color-pt2);
 }
 
-.task-item.doing.pt-3 .task-point {
+.task-item.doing.pt-3 .task-point,
+.task-item.doing.pt-3 .point-number,
+.task-item.doing.pt-3 .point-unit {
     color: var(--color-pt3);
 }
 
-.task-item.doing.pt-5 .task-point {
+.task-item.doing.pt-5 .task-point,
+.task-item.doing.pt-5 .point-number,
+.task-item.doing.pt-5 .point-unit {
     color: var(--color-pt5);
 }
 
-.task-item.doing.pt-8 .task-point {
+.task-item.doing.pt-8 .task-point,
+.task-item.doing.pt-8 .point-number,
+.task-item.doing.pt-8 .point-unit {
     color: var(--color-pt8);
 }
 
@@ -419,12 +436,34 @@ header h1 {
 }
 
 .task-point {
-    padding: 4px 12px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 10px;
     border-radius: 15px;
-    font-size: 0.85rem;
-    font-weight: 700;
     color: var(--color-white);
     margin-right: 10px;
+    line-height: 1;
+    min-width: 45px;
+}
+
+.point-number {
+    font-family: "Staatliches", sans-serif;
+    font-size: 1.4rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    display: block;
+}
+
+.point-unit {
+    font-family: "Lato", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-top: -2px;
+    opacity: 0.9;
 }
 
 .task-item.unstarted .task-point,
@@ -583,24 +622,37 @@ footer {
     .container {
         padding: 15px;
     }
-    
+
     header h1 {
         font-size: 2rem;
     }
-    
+
     .point-selector {
         gap: 8px;
     }
-    
+
     .point-badge {
         padding: 6px 12px;
         font-size: 0.85rem;
     }
-    
+
+    .task-point {
+        min-width: 40px;
+        padding: 5px 8px;
+    }
+
+    .point-number {
+        font-size: 1.2rem;
+    }
+
+    .point-unit {
+        font-size: 0.6rem;
+    }
+
     .modal-actions {
         flex-direction: column;
     }
-    
+
     .modal-actions .btn {
         width: 100%;
     }
