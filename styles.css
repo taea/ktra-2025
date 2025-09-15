@@ -105,15 +105,36 @@ header h1 {
 }
 
 .point-badge {
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: 20px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
     background: var(--color-border);
     color: var(--color-text);
     cursor: pointer;
     transition: var(--transition);
-    font-size: 0.9rem;
-    font-weight: 700;
+    line-height: 1;
+}
+
+.point-badge .point-number {
+    font-family: "Staatliches", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    display: block;
+}
+
+.point-badge .point-unit {
+    font-family: "Lato", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-top: -2px;
+    opacity: 0.9;
 }
 
 .point-label input[type="radio"]:checked + .point-badge {
@@ -304,50 +325,15 @@ header h1 {
 }
 
 .task-item.doing .task-point {
-    background: var(--color-white);
-    color: inherit;
+    background: transparent;
+    color: var(--color-white);
 }
 
 .task-item.doing .point-number,
 .task-item.doing .point-unit {
-    color: inherit;
+    color: var(--color-white);
 }
 
-.task-item.doing.pt-0 .task-point,
-.task-item.doing.pt-0 .point-number,
-.task-item.doing.pt-0 .point-unit {
-    color: var(--color-pt0);
-}
-
-.task-item.doing.pt-1 .task-point,
-.task-item.doing.pt-1 .point-number,
-.task-item.doing.pt-1 .point-unit {
-    color: var(--color-pt1);
-}
-
-.task-item.doing.pt-2 .task-point,
-.task-item.doing.pt-2 .point-number,
-.task-item.doing.pt-2 .point-unit {
-    color: var(--color-pt2);
-}
-
-.task-item.doing.pt-3 .task-point,
-.task-item.doing.pt-3 .point-number,
-.task-item.doing.pt-3 .point-unit {
-    color: var(--color-pt3);
-}
-
-.task-item.doing.pt-5 .task-point,
-.task-item.doing.pt-5 .point-number,
-.task-item.doing.pt-5 .point-unit {
-    color: var(--color-pt5);
-}
-
-.task-item.doing.pt-8 .task-point,
-.task-item.doing.pt-8 .point-number,
-.task-item.doing.pt-8 .point-unit {
-    color: var(--color-pt8);
-}
 
 .task-item.doing .task-status-btn {
     background: var(--color-white);
@@ -632,8 +618,16 @@ footer {
     }
 
     .point-badge {
-        padding: 6px 12px;
-        font-size: 0.85rem;
+        width: 48px;
+        height: 48px;
+    }
+
+    .point-badge .point-number {
+        font-size: 1.4rem;
+    }
+
+    .point-badge .point-unit {
+        font-size: 0.6rem;
     }
 
     .task-point {
