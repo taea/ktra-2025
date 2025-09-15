@@ -184,14 +184,15 @@ header h1 {
 }
 
 .btn-primary {
-    background-color: var(--color-base);
+    background-color: #1f3466;
     color: var(--color-white);
     width: 100%;
     justify-content: center;
 }
 
 .btn-primary:hover {
-    background-color: #3a7bc8;
+    background-color: #1f3466;
+    opacity: 0.9;
     transform: translateY(-2px);
 }
 
