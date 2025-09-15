@@ -692,3 +692,10 @@ window.setTaskStatus = (status) => taskManager.setTaskStatusFromModal(status);
 
 // アプリケーションの初期化
 const taskManager = new TaskManager();
+
+// モーダルの欄外クリックで閉じる
+document.getElementById('edit-modal').addEventListener('click', (e) => {
+    if (e.target.id === 'edit-modal') {
+        taskManager.closeEditModal();
+    }
+});

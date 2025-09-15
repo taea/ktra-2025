@@ -1,13 +1,14 @@
 :root {
     --color-base: #dbbea1;
-    --color-background: #f5f7fa;
+    --color-base-light: #e6d0ba; /* 少し明るくしたベースカラー */
+    --color-background: #f7f5f2;
     --color-white: #ffffff;
     --color-text: #333333;
-    --color-text-light: #666666;
-    --color-border: #e1e8ed;
+    --color-text-light: #6b6560;
+    --color-border: #e8e4df;
 
     /* ポイント別カラー */
-    --color-pt0: #95a5a6;
+    --color-pt0: #9d9590;
     --color-pt1: #578fcc;
     --color-pt2: #30ad93;
     --color-pt3: #ddb51c;
@@ -665,7 +666,7 @@ header h1 {
 }
 
 .modal-content {
-    background: var(--color-white);
+    background: var(--color-base-light);
     border-radius: var(--border-radius);
     max-width: var(--max-width);
     width: 100%;
@@ -673,32 +674,6 @@ header h1 {
     overflow-y: auto;
 }
 
-.modal-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-    border-bottom: 1px solid var(--color-border);
-}
-
-.modal-header h2 {
-    font-size: 1.5rem;
-    font-weight: 700;
-}
-
-.modal-close {
-    background: none;
-    border: none;
-    font-size: 1.5rem;
-    color: var(--color-text-light);
-    cursor: pointer;
-    padding: 5px;
-    transition: var(--transition);
-}
-
-.modal-close:hover {
-    color: var(--color-text);
-}
 
 /* モーダル内のフォーム */
 #edit-task-form {
@@ -709,7 +684,7 @@ header h1 {
 .status-actions {
     margin: 20px 0;
     padding: 15px;
-    background: var(--color-background);
+    background: var(--color-base);
     border-radius: var(--border-radius);
 }
 
@@ -750,15 +725,15 @@ header h1 {
 }
 
 .btn-status.active {
-    background: var(--color-base);
+    background: #3a4a5c;
     color: var(--color-white);
-    border-color: var(--color-base);
+    border-color: #3a4a5c;
 }
 
 .btn-status.active-done {
-    background: var(--color-pt2);
+    background: #3a4a5c;
     color: var(--color-white);
-    border-color: var(--color-pt2);
+    border-color: #3a4a5c;
 }
 
 .modal-actions {
