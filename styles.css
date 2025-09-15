@@ -181,16 +181,13 @@ header h1 {
 }
 
 .point-label input[type="radio"]:checked + .point-badge {
-    color: var(--color-white);
     border: none;
 }
 
-.pt-0 { background-color: var(--color-pt0); }
-.pt-1 { background-color: var(--color-pt1); }
-.pt-2 { background-color: var(--color-pt2); }
-.pt-3 { background-color: var(--color-pt3); }
-.pt-5 { background-color: var(--color-pt5); }
-.pt-8 { background-color: var(--color-pt8); }
+.point-label input[type="radio"]:checked + .point-badge .point-number,
+.point-label input[type="radio"]:checked + .point-badge .point-unit {
+    color: var(--color-white);
+}
 
 .point-label input[type="radio"]:checked + .pt-0 { background-color: var(--color-pt0); }
 .point-label input[type="radio"]:checked + .pt-1 { background-color: var(--color-pt1); }
