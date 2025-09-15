@@ -24,6 +24,16 @@ class TaskManager {
             this.addTask();
         });
 
+        // ポイントボタンクリックで即座にsubmit
+        document.querySelectorAll('#new-task-form input[name="points"]').forEach(radio => {
+            radio.addEventListener('change', () => {
+                const titleInput = document.getElementById('task-title');
+                if (titleInput.value.trim()) {
+                    this.addTask();
+                }
+            });
+        });
+
         // 編集フォーム
         document.getElementById('edit-task-form').addEventListener('submit', (e) => {
             e.preventDefault();
