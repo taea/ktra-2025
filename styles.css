@@ -1,14 +1,14 @@
 :root {
     --color-base: #dbbea1;
     --color-base-light: #e6d0ba; /* 少し明るくしたベースカラー */
-    --color-background: #f5f7fa;
+    --color-background: #f7f5f2;
     --color-white: #ffffff;
     --color-text: #333333;
-    --color-text-light: #666666;
-    --color-border: #e1e8ed;
+    --color-text-light: #6b6560;
+    --color-border: #e8e4df;
 
     /* ポイント別カラー */
-    --color-pt0: #95a5a6;
+    --color-pt0: #9d9590;
     --color-pt1: #578fcc;
     --color-pt2: #30ad93;
     --color-pt3: #ddb51c;
