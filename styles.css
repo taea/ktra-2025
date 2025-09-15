@@ -466,8 +466,8 @@ header h1 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
     color: var(--color-white);
     margin-right: 10px;
@@ -477,7 +477,7 @@ header h1 {
 
 .task-point .point-number {
     font-family: "Staatliches", sans-serif;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: 400;
     letter-spacing: 0.05em;
     display: block;
@@ -485,11 +485,11 @@ header h1 {
 
 .task-point .point-unit {
     font-family: "Lato", sans-serif;
-    font-size: 0.65rem;
+    font-size: 0.55rem;
     font-weight: 400;
     letter-spacing: 0.1em;
     display: block;
-    margin-top: -2px;
+    margin-top: -3px;
 }
 
 .task-item.unstarted .task-point {
@@ -710,16 +710,16 @@ footer {
     }
 
     .task-point {
-        width: 48px;
-        height: 48px;
+        width: 42px;
+        height: 42px;
     }
 
     .task-point .point-number {
-        font-size: 1.6rem;
+        font-size: 1.3rem;
     }
 
     .task-point .point-unit {
-        font-size: 0.6rem;
+        font-size: 0.5rem;
     }
 
     .modal-actions {
