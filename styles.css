@@ -61,7 +61,6 @@ header h1 {
     color: var(--color-white);
     font-size: 2rem;
     font-weight: 900;
-    letter-spacing: -1px;
     margin: 0;
 }
 
@@ -290,7 +289,7 @@ header h1 {
 .task-item {
     background: var(--color-white);
     border-radius: var(--border-radius);
-    padding: 15px;
+    padding: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     transition: var(--transition);
     cursor: pointer;
@@ -657,7 +656,7 @@ header h1 {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.5);
+    background: rgba(219, 190, 161, 0.9); /* var(--color-base) with opacity */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -699,6 +698,11 @@ header h1 {
 
 .modal-close:hover {
     color: var(--color-text);
+}
+
+/* モーダル内のフォーム */
+#edit-task-form {
+    padding: 20px;
 }
 
 /* ステータス変更ボタン */
