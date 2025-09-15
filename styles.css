@@ -807,11 +807,11 @@ footer {
     }
 
     .task-point .point-number {
-        font-size: 1.3rem;
+        font-size: 2rem;
     }
 
     .task-point .point-unit {
-        font-size: 0.5rem;
+        font-size: 0.55rem;
     }
 
     .modal-actions {
