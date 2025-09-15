@@ -105,20 +105,41 @@ header h1 {
 }
 
 .point-badge {
-    display: inline-block;
-    padding: 8px 16px;
-    border-radius: 20px;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
     background: var(--color-border);
     color: var(--color-text);
     cursor: pointer;
     transition: var(--transition);
-    font-size: 0.9rem;
-    font-weight: 700;
+    line-height: 1;
+}
+
+.point-badge .point-number {
+    font-family: "Staatliches", sans-serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    display: block;
+}
+
+.point-badge .point-unit {
+    font-family: "Lato", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-top: -2px;
 }
 
 .point-label input[type="radio"]:checked + .point-badge {
     color: var(--color-white);
-    transform: scale(1.1);
+    width: 56px;
+    height: 56px;
 }
 
 .pt-0 { background-color: var(--color-pt0); }
@@ -267,11 +288,11 @@ header h1 {
 }
 
 .task-item.unstarted .task-status-btn {
-    border-color: var(--color-text-light);
+    border-color: var(--color-base);
 }
 
 .task-item.unstarted .task-status-btn i {
-    color: var(--color-text-light);
+    color: var(--color-base);
 }
 
 /* Doingステータス - ポイント別背景色 */
@@ -304,33 +325,15 @@ header h1 {
 }
 
 .task-item.doing .task-point {
-    background: var(--color-white);
-    color: inherit;
+    background: transparent;
 }
 
-.task-item.doing.pt-0 .task-point {
-    color: var(--color-pt0);
+.task-item.doing .task-point,
+.task-item.doing .point-number,
+.task-item.doing .point-unit {
+    color: var(--color-white);
 }
 
-.task-item.doing.pt-1 .task-point {
-    color: var(--color-pt1);
-}
-
-.task-item.doing.pt-2 .task-point {
-    color: var(--color-pt2);
-}
-
-.task-item.doing.pt-3 .task-point {
-    color: var(--color-pt3);
-}
-
-.task-item.doing.pt-5 .task-point {
-    color: var(--color-pt5);
-}
-
-.task-item.doing.pt-8 .task-point {
-    color: var(--color-pt8);
-}
 
 .task-item.doing .task-status-btn {
     background: var(--color-white);
@@ -371,6 +374,46 @@ header h1 {
 }
 
 /* Doneステータス - ポイント別背景色 */
+.task-item.done .task-point {
+    background: transparent;
+}
+
+.task-item.done.pt-0 .task-point,
+.task-item.done.pt-0 .point-number,
+.task-item.done.pt-0 .point-unit {
+    color: var(--color-pt0);
+}
+
+.task-item.done.pt-1 .task-point,
+.task-item.done.pt-1 .point-number,
+.task-item.done.pt-1 .point-unit {
+    color: var(--color-pt1);
+}
+
+.task-item.done.pt-2 .task-point,
+.task-item.done.pt-2 .point-number,
+.task-item.done.pt-2 .point-unit {
+    color: var(--color-pt2);
+}
+
+.task-item.done.pt-3 .task-point,
+.task-item.done.pt-3 .point-number,
+.task-item.done.pt-3 .point-unit {
+    color: var(--color-pt3);
+}
+
+.task-item.done.pt-5 .task-point,
+.task-item.done.pt-5 .point-number,
+.task-item.done.pt-5 .point-unit {
+    color: var(--color-pt5);
+}
+
+.task-item.done.pt-8 .task-point,
+.task-item.done.pt-8 .point-number,
+.task-item.done.pt-8 .point-unit {
+    color: var(--color-pt8);
+}
+
 .task-item.done.pt-0 .task-status-btn {
     background: var(--color-pt0);
     border-color: var(--color-pt0);
@@ -419,18 +462,74 @@ header h1 {
 }
 
 .task-point {
-    padding: 4px 12px;
-    border-radius: 15px;
-    font-size: 0.85rem;
-    font-weight: 700;
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
     color: var(--color-white);
     margin-right: 10px;
+    line-height: 1;
+    flex-shrink: 0;
 }
 
-.task-item.unstarted .task-point,
-.task-item.doing .task-point,
-.task-item.done .task-point {
-    opacity: 0.9;
+.task-point .point-number {
+    font-family: "Staatliches", sans-serif;
+    font-size: 2rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    display: block;
+}
+
+.task-point .point-unit {
+    font-family: "Lato", sans-serif;
+    font-size: 0.65rem;
+    font-weight: 400;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-top: -2px;
+}
+
+.task-item.unstarted .task-point {
+    background: transparent;
+}
+
+.task-item.unstarted.pt-0 .task-point,
+.task-item.unstarted.pt-0 .point-number,
+.task-item.unstarted.pt-0 .point-unit {
+    color: var(--color-pt0);
+}
+
+.task-item.unstarted.pt-1 .task-point,
+.task-item.unstarted.pt-1 .point-number,
+.task-item.unstarted.pt-1 .point-unit {
+    color: var(--color-pt1);
+}
+
+.task-item.unstarted.pt-2 .task-point,
+.task-item.unstarted.pt-2 .point-number,
+.task-item.unstarted.pt-2 .point-unit {
+    color: var(--color-pt2);
+}
+
+.task-item.unstarted.pt-3 .task-point,
+.task-item.unstarted.pt-3 .point-number,
+.task-item.unstarted.pt-3 .point-unit {
+    color: var(--color-pt3);
+}
+
+.task-item.unstarted.pt-5 .task-point,
+.task-item.unstarted.pt-5 .point-number,
+.task-item.unstarted.pt-5 .point-unit {
+    color: var(--color-pt5);
+}
+
+.task-item.unstarted.pt-8 .task-point,
+.task-item.unstarted.pt-8 .point-number,
+.task-item.unstarted.pt-8 .point-unit {
+    color: var(--color-pt8);
 }
 
 
@@ -583,24 +682,50 @@ footer {
     .container {
         padding: 15px;
     }
-    
+
     header h1 {
         font-size: 2rem;
     }
-    
+
     .point-selector {
         gap: 8px;
     }
-    
+
     .point-badge {
-        padding: 6px 12px;
-        font-size: 0.85rem;
+        width: 44px;
+        height: 44px;
     }
-    
+
+    .point-label input[type="radio"]:checked + .point-badge {
+        width: 48px;
+        height: 48px;
+    }
+
+    .point-badge .point-number {
+        font-size: 1.4rem;
+    }
+
+    .point-badge .point-unit {
+        font-size: 0.6rem;
+    }
+
+    .task-point {
+        width: 48px;
+        height: 48px;
+    }
+
+    .task-point .point-number {
+        font-size: 1.6rem;
+    }
+
+    .task-point .point-unit {
+        font-size: 0.6rem;
+    }
+
     .modal-actions {
         flex-direction: column;
     }
-    
+
     .modal-actions .btn {
         width: 100%;
     }

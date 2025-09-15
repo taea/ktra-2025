@@ -346,11 +346,14 @@ class TaskManager {
         };
 
         return `
-            <div class="task-item ${task.status} pt-${task.points}" 
+            <div class="task-item ${task.status} pt-${task.points}"
                  data-task-id="${task.id}"
                  draggable="true">
                 <div class="task-content">
-                    <span class="task-point pt-${task.points}">${task.points}pt</span>
+                    <span class="task-point pt-${task.points}">
+                        <span class="point-number">${task.points}</span>
+                        <span class="point-unit">pt</span>
+                    </span>
                     <span class="task-title">${this.escapeHtml(task.title)}</span>
                 </div>
                 <button class="task-status-btn" data-action="status" data-task-id="${task.id}">
