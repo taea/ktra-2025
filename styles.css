@@ -813,7 +813,11 @@ footer {
         gap: 8px;
     }
 
-    /* モバイルでもPC版と同じサイズを維持 */
+    /* モバイルではポイントボタンを少し小さく */
+    .point-badge {
+        width: 54px;
+        height: 54px;
+    }
 
     .task-point {
         width: 42px;
