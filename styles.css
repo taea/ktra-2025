@@ -808,18 +808,7 @@ footer {
         gap: 8px;
     }
 
-    .point-badge {
-        width: 48px;
-        height: 48px;
-    }
-
-    .point-badge .point-number {
-        font-size: 1.4rem;
-    }
-
-    .point-badge .point-unit {
-        font-size: 0.6rem;
-    }
+    /* モバイルでもPC版と同じサイズを維持 */
 
     .task-point {
         width: 42px;
