@@ -303,12 +303,52 @@ header h1 {
     transform: scale(1.1);
 }
 
-.task-item.unstarted .task-status-btn {
-    border-color: var(--color-text-light);
+.task-item.unstarted.pt-0 .task-status-btn {
+    border-color: var(--color-pt0);
 }
 
-.task-item.unstarted .task-status-btn i {
-    color: var(--color-text-light);
+.task-item.unstarted.pt-0 .task-status-btn i {
+    color: var(--color-pt0);
+}
+
+.task-item.unstarted.pt-1 .task-status-btn {
+    border-color: var(--color-pt1);
+}
+
+.task-item.unstarted.pt-1 .task-status-btn i {
+    color: var(--color-pt1);
+}
+
+.task-item.unstarted.pt-2 .task-status-btn {
+    border-color: var(--color-pt2);
+}
+
+.task-item.unstarted.pt-2 .task-status-btn i {
+    color: var(--color-pt2);
+}
+
+.task-item.unstarted.pt-3 .task-status-btn {
+    border-color: var(--color-pt3);
+}
+
+.task-item.unstarted.pt-3 .task-status-btn i {
+    color: var(--color-pt3);
+}
+
+.task-item.unstarted.pt-5 .task-status-btn {
+    border-color: var(--color-pt5);
+}
+
+.task-item.unstarted.pt-5 .task-status-btn i {
+    color: var(--color-pt5);
+}
+
+.task-item.unstarted.pt-8 .task-status-btn {
+    border-color: var(--color-pt8);
+}
+
+.task-item.unstarted.pt-8 .task-status-btn i {
+    color: var(--color-pt8);
 }
 
 /* Doingステータス - ポイント別背景色 */
