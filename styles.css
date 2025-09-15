@@ -184,14 +184,14 @@ header h1 {
 }
 
 .btn-primary {
-    background-color: #1f3466;
+    background-color: #3a4a5c;
     color: var(--color-white);
     width: 100%;
     justify-content: center;
 }
 
 .btn-primary:hover {
-    background-color: #1f3466;
+    background-color: #3a4a5c;
     opacity: 0.9;
     transform: translateY(-2px);
 }
@@ -209,7 +209,7 @@ header h1 {
 .btn-link {
     background: none;
     border: none;
-    color: #1f3466;
+    color: #3a4a5c;
     cursor: pointer;
     padding: 10px;
     font-size: 0.95rem;
@@ -220,7 +220,7 @@ header h1 {
 }
 
 .btn-link:hover {
-    color: #1f3466;
+    color: #3a4a5c;
     opacity: 0.8;
 }
 
