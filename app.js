@@ -93,6 +93,7 @@ class TaskManager {
         }
 
         // データを保存
+        this.cleanupOldDoneTasks(); // 古い完了タスクを自動削除
         this.saveTasks();
         
         // アニメーション表示（render前に実行）
@@ -215,6 +216,7 @@ class TaskManager {
         }
         
         this.updateStatusButtons(status);
+        this.cleanupOldDoneTasks(); // 古い完了タスクを自動削除
         this.saveTasks();
         this.render();
     }
