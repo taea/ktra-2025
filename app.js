@@ -61,6 +61,7 @@ class TaskManager {
         };
 
         this.tasks.unshift(task); // 新しいタスクを先頭に追加
+        this.cleanupOldDoneTasks(); // 古い完了タスクを自動削除
         this.saveTasks();
         this.render();
 
@@ -161,6 +162,7 @@ class TaskManager {
         task.title = document.getElementById('edit-task-title').value.trim();
         task.points = parseInt(document.querySelector('input[name="edit-points"]:checked').value);
 
+        this.cleanupOldDoneTasks(); // 古い完了タスクを自動削除
         this.saveTasks();
         this.render();
         this.closeEditModal();
@@ -169,13 +171,27 @@ class TaskManager {
     // タスクの削除
     deleteTask() {
         if (!this.currentEditingTaskId) return;
-        
+
         if (confirm('本当にこのタスクを削除しますか？')) {
             this.tasks = this.tasks.filter(t => t.id !== this.currentEditingTaskId);
             this.saveTasks();
             this.render();
             this.closeEditModal();
         }
+    }
+
+    // 古い完了タスクの自動削除（2週間以上経過したもの）
+    cleanupOldDoneTasks() {
+        const twoWeeksAgo = new Date();
+        twoWeeksAgo.setDate(twoWeeksAgo.getDate() - 14);
+
+        this.tasks = this.tasks.filter(task => {
+            if (task.status !== 'done' || !task.completedAt) {
+                return true;
+            }
+            const completedDate = new Date(task.completedAt);
+            return completedDate > twoWeeksAgo;
+        });
     }
 
     // 編集モーダルを閉じる
