@@ -576,12 +576,8 @@ class TaskManager {
         
         if (!draggedTask || !targetTask) return;
         
-        // 完了タスクと未完了タスク間のドラッグを制限
-        const draggedIsDone = draggedTask.status === 'done';
-        const targetIsDone = targetTask.status === 'done';
-        
-        // 異なるグループ間のドラッグは無効
-        if (draggedIsDone !== targetIsDone) {
+        // 異なるステータスグループ間のドラッグは無効
+        if (draggedTask.status !== targetTask.status) {
             return;
         }
         
