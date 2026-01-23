@@ -341,16 +341,19 @@ class TaskManager {
         
         // それぞれをソート
         const sortedActive = activeTasks.sort((a, b) => {
-            // カスタムオーダーがある場合は優先
-            if (a.order !== undefined && b.order !== undefined) {
-                return a.order - b.order;
-            }
-            // なければステータス順（doing -> unstarted）
+            // まずステータス順（doing -> unstarted）
             const statusPriority = {
                 'doing': 0,
                 'unstarted': 1
             };
-            return statusPriority[a.status] - statusPriority[b.status];
+            const statusDiff = statusPriority[a.status] - statusPriority[b.status];
+            if (statusDiff !== 0) return statusDiff;
+
+            // 同じステータス内ではカスタムオーダーを使用
+            if (a.order !== undefined && b.order !== undefined) {
+                return a.order - b.order;
+            }
+            return 0;
         });
         
         const sortedDone = doneTasks.sort((a, b) => {
